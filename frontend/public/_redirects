@@ -1,7 +1,7 @@
 # Netlify Redirects File
 # 1. Replace https://YOUR-BACKEND.onrender.com below with your actual Render URL
-/api/*     https://YOUR-BACKEND.onrender.com/api/:splat    200
-/exports/* https://YOUR-BACKEND.onrender.com/exports/:splat 200
+/api/*     https://sentinel-exnq.onrender.com/api/:splat    200
+/exports/* https://sentinel-exnq.onrender.com/exports/:splat 200
 
 # 2. React Router catch-all for frontend routing
 /*    /index.html   200
