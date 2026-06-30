@@ -26,10 +26,10 @@ deep-translator==1.11.4
 # Optional — for infrastructure OSINT
 python-whois==0.9.3
 
-# Advanced OSINT dependencies
-sentence-transformers>=3.0.0
-torch>=2.0.0
-spacy>=3.7.0
+# Advanced OSINT dependencies (Disabled for Render Free Tier OOM)
+# sentence-transformers>=3.0.0
+# torch>=2.0.0
+# spacy>=3.7.0
 geoip2>=4.8.0
 groq>=0.9.0
 python-louvain>=0.16
