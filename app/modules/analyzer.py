@@ -3,19 +3,21 @@ import math
 from difflib import SequenceMatcher
 import pandas as pd
 
-# Advanced OSINT Imports
-try:
-    from sentence_transformers import SentenceTransformer
-    # We load a small, fast, multilingual model
-    _semantic_model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
-except ImportError:
-    _semantic_model = None
+# Advanced OSINT Imports - DISABLED for Render Free Tier OOM
+_semantic_model = None
+# try:
+#     from sentence_transformers import SentenceTransformer
+#     # We load a small, fast, multilingual model
+#     _semantic_model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
+# except ImportError:
+#     _semantic_model = None
 
-try:
-    import spacy
-    _nlp = spacy.load("en_core_web_sm")
-except ImportError:
-    _nlp = None
+_nlp = None
+# try:
+#     import spacy
+#     _nlp = spacy.load("en_core_web_sm")
+# except ImportError:
+#     _nlp = None
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
