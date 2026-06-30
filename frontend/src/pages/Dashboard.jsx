@@ -3,6 +3,22 @@ import { useNavigate } from 'react-router-dom';
 import { useApp } from '../AppContext';
 import MetricCard from '../components/MetricCard';
 import api from '../api/sentinel';
+import { motion } from 'framer-motion';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 300, damping: 24 } }
+};
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -48,9 +64,14 @@ export default function Dashboard() {
   const casesCount = stats?.active_cases || 0;
 
   return (
-    <div className="page-enter">
+    <div>
       {/* Hero */}
-      <div className="hero-card mb-5">
+      <motion.div 
+        initial={{ opacity: 0, y: -10 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        transition={{ duration: 0.4 }}
+        className="hero-card mb-5"
+      >
         <div className="flex items-center justify-between" style={{ position: 'relative', zIndex: 1 }}>
           <div>
             <h1 style={{ fontSize: '24px', fontWeight: 800, letterSpacing: '-0.03em', marginBottom: '4px' }}>
@@ -71,47 +92,65 @@ export default function Dashboard() {
             )}
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Metrics — real data */}
-      <div className="metrics-grid">
-        <MetricCard icon="📊" value={casesCount} label="Active Cases" accentColor="var(--accent-blue)" className="stagger-1" />
-        <MetricCard icon="🔒" value={evidenceCount} label="Evidence Items" accentColor="var(--accent-green)" className="stagger-2" />
-        <MetricCard icon="🎯" value={resultCount} label="Total Results" accentColor="var(--accent-amber)" className="stagger-3" />
-        <MetricCard icon="📡" value={stats?.platforms_monitored || 14} label="Platform Connectors" accentColor="var(--accent-purple)" className="stagger-4" />
-        <MetricCard icon="🌐" value="12" label="Languages Active" accentColor="var(--accent-cyan)" className="stagger-5" />
-      </div>
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+        className="metrics-grid"
+      >
+        <motion.div variants={cardVariants}><MetricCard icon="📊" value={casesCount} label="Active Cases" accentColor="var(--accent-blue)" /></motion.div>
+        <motion.div variants={cardVariants}><MetricCard icon="🔒" value={evidenceCount} label="Evidence Items" accentColor="var(--accent-green)" /></motion.div>
+        <motion.div variants={cardVariants}><MetricCard icon="🎯" value={resultCount} label="Total Results" accentColor="var(--accent-amber)" /></motion.div>
+        <motion.div variants={cardVariants}><MetricCard icon="📡" value={stats?.platforms_monitored || 14} label="Platform Connectors" accentColor="var(--accent-purple)" /></motion.div>
+        <motion.div variants={cardVariants}><MetricCard icon="🌐" value="12" label="Languages Active" accentColor="var(--accent-cyan)" /></motion.div>
+      </motion.div>
 
       {/* Modules Grid */}
-      <div className="glass-card no-hover">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="glass-card no-hover"
+      >
         <div className="section-header">
           <div>
             <div className="section-title">Intelligence Modules</div>
             <div className="section-subtitle">{modules.length} modules available — click to navigate</div>
           </div>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))', gap: '8px' }}>
+        
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))', gap: '8px' }}
+        >
           {modules.map((mod, i) => (
-            <div
+            <motion.div
               key={mod.name}
-              className="animate-slide-up"
+              variants={cardVariants}
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
               style={{
                 padding: '12px',
                 background: 'var(--bg-card)',
                 border: '1px solid var(--border-subtle)',
                 borderRadius: 'var(--radius-md)',
-                animationDelay: `${i * 0.03}s`,
-                transition: 'all 0.2s ease',
                 cursor: 'pointer',
               }}
               onClick={() => navigate(mod.path)}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = 'var(--border-accent)';
                 e.currentTarget.style.background = 'var(--bg-card-hover)';
+                e.currentTarget.style.boxShadow = 'var(--shadow-glow-blue)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.borderColor = 'var(--border-subtle)';
                 e.currentTarget.style.background = 'var(--bg-card)';
+                e.currentTarget.style.boxShadow = 'none';
               }}
             >
               <div className="flex items-center gap-2 mb-1">
@@ -126,10 +165,10 @@ export default function Dashboard() {
                 <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--accent-green)' }}></span>
                 <span style={{ fontSize: '9px', color: 'var(--text-success)', textTransform: 'uppercase', fontWeight: 600, letterSpacing: '0.06em' }}>Online</span>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { useApp } from '../AppContext';
+import { motion } from 'framer-motion';
 
 const navItems = [
   { label: 'COMMAND', items: [
@@ -26,6 +27,19 @@ const navItems = [
   ]},
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.05 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -15 },
+  show: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+};
+
 export default function Sidebar() {
   const { evidenceCount } = useApp();
 
@@ -39,29 +53,35 @@ export default function Sidebar() {
         <div className="brand-sub">Intel Platform v3.0</div>
       </div>
 
-      <nav className="sidebar-nav">
+      <motion.nav 
+        className="sidebar-nav"
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+      >
         {navItems.map((section) => (
           <div key={section.label}>
-            <div className="nav-section-label">{section.label}</div>
+            <motion.div variants={itemVariants} className="nav-section-label">{section.label}</motion.div>
             {section.items.map((item) => (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                end={item.path === '/'}
-                className={({ isActive }) =>
-                  `nav-item ${isActive ? 'active' : ''}`
-                }
-              >
-                <span className="nav-icon">{item.icon}</span>
-                {item.label}
-                {item.showBadge && evidenceCount > 0 && (
-                  <span className="nav-badge">{evidenceCount}</span>
-                )}
-              </NavLink>
+              <motion.div key={item.path} variants={itemVariants} whileHover={{ x: 4 }} whileTap={{ scale: 0.98 }}>
+                <NavLink
+                  to={item.path}
+                  end={item.path === '/'}
+                  className={({ isActive }) =>
+                    `nav-item ${isActive ? 'active' : ''}`
+                  }
+                >
+                  <span className="nav-icon">{item.icon}</span>
+                  {item.label}
+                  {item.showBadge && evidenceCount > 0 && (
+                    <span className="nav-badge">{evidenceCount}</span>
+                  )}
+                </NavLink>
+              </motion.div>
             ))}
           </div>
         ))}
-      </nav>
+      </motion.nav>
 
       <div className="sidebar-footer">
         <div className="live-indicator">
