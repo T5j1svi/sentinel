@@ -45,6 +45,7 @@ class Settings:
     CASES_DIR: Path = PROJECT_ROOT / "cases"
 
     def __init__(self):
+        (PROJECT_ROOT / 'database').mkdir(parents=True, exist_ok=True)
         for d in [self.UPLOADS_DIR, self.EXPORTS_DIR, self.EVIDENCE_DIR, self.CASES_DIR]:
             d.mkdir(parents=True, exist_ok=True)
 
