@@ -7,79 +7,80 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@1,400;1,500;1,600&display=swap');
 
 /* ============================================
-   CSS CUSTOM PROPERTIES — DESIGN TOKENS
+   CSS CUSTOM PROPERTIES — DESIGN TOKENS (CYBERPUNK THEME)
    ============================================ */
 :root {
-  /* Core palette — deep navy ops centre */
-  --bg-primary: #04060d;
-  --bg-secondary: #080c18;
-  --bg-tertiary: #0c1224;
-  --bg-card: rgba(12, 18, 36, 0.7);
-  --bg-card-hover: rgba(16, 25, 50, 0.85);
-  --bg-glass: rgba(12, 18, 36, 0.55);
-  --bg-glass-strong: rgba(12, 18, 36, 0.85);
-  --bg-input: rgba(12, 18, 36, 0.6);
-  --bg-spotlight: radial-gradient(ellipse at 50% 0%, rgba(59,130,246,0.04) 0%, transparent 60%);
+  /* Core palette — Deep space / cyberpunk neon */
+  --bg-primary: #050211;
+  --bg-secondary: #0a041f;
+  --bg-tertiary: #130938;
+  --bg-card: rgba(10, 4, 31, 0.6);
+  --bg-card-hover: rgba(22, 11, 56, 0.8);
+  --bg-glass: rgba(10, 4, 31, 0.5);
+  --bg-glass-strong: rgba(10, 4, 31, 0.85);
+  --bg-input: rgba(5, 2, 17, 0.8);
+  --bg-spotlight: radial-gradient(circle at 50% -20%, rgba(255,0,255,0.1) 0%, rgba(0,255,255,0.05) 40%, transparent 80%);
 
-  /* Borders */
-  --border-subtle: rgba(59, 130, 246, 0.06);
-  --border-default: rgba(59, 130, 246, 0.12);
-  --border-accent: rgba(59, 130, 246, 0.25);
-  --border-danger: rgba(239, 68, 68, 0.25);
-  --border-glow: rgba(59, 130, 246, 0.4);
+  /* Borders - Glowing Neon */
+  --border-subtle: rgba(0, 255, 255, 0.15);
+  --border-default: rgba(255, 0, 255, 0.3);
+  --border-accent: rgba(0, 255, 255, 0.8);
+  --border-danger: rgba(255, 0, 102, 0.6);
+  --border-glow: rgba(0, 255, 255, 0.6);
 
-  /* Text */
-  --text-primary: #edf2f7;
-  --text-secondary: #94a3b8;
-  --text-muted: #5a6a80;
-  --text-accent: #60a5fa;
-  --text-danger: #f87171;
-  --text-success: #4ade80;
-  --text-warning: #fbbf24;
+  /* Text - Holographic */
+  --text-primary: #e0f7fa;
+  --text-secondary: #84ffff;
+  --text-muted: #6a1b9a;
+  --text-accent: #ff4081;
+  --text-danger: #ff0055;
+  --text-success: #00e676;
+  --text-warning: #ffea00;
 
   /* Accent colors */
-  --accent-blue: #3b82f6;
-  --accent-blue-glow: rgba(59, 130, 246, 0.12);
-  --accent-red: #ef4444;
-  --accent-red-glow: rgba(239, 68, 68, 0.1);
-  --accent-green: #10b981;
-  --accent-green-glow: rgba(16, 185, 129, 0.1);
-  --accent-amber: #f59e0b;
-  --accent-amber-glow: rgba(245, 158, 11, 0.1);
-  --accent-purple: #8b5cf6;
-  --accent-purple-glow: rgba(139, 92, 246, 0.1);
-  --accent-cyan: #06b6d4;
-  --accent-cyan-glow: rgba(6, 182, 212, 0.1);
+  --accent-blue: #00e5ff;
+  --accent-blue-glow: rgba(0, 229, 255, 0.2);
+  --accent-red: #ff0055;
+  --accent-red-glow: rgba(255, 0, 85, 0.2);
+  --accent-green: #00e676;
+  --accent-green: #39ff14;
+  --accent-green-glow: rgba(57, 255, 20, 0.3);
+  --accent-amber: #ffea00;
+  --accent-amber-glow: rgba(255, 234, 0, 0.3);
+  --accent-purple: #bc13fe;
+  --accent-purple-glow: rgba(188, 19, 254, 0.3);
+  --accent-cyan: #00f3ff;
+  --accent-cyan-glow: rgba(0, 243, 255, 0.3);
 
   /* Platform colors */
-  --platform-x: #1DA1F2;
-  --platform-instagram: #C13584;
-  --platform-facebook: #1877F2;
-  --platform-tiktok: #ff0050;
-  --platform-telegram: #229ED9;
-  --platform-youtube: #FF0000;
-  --platform-linkedin: #0A66C2;
+  --platform-x: #00ffff;
+  --platform-instagram: #b700ff;
+  --platform-facebook: #00ffff;
+  --platform-tiktok: #ff003c;
+  --platform-telegram: #00ffff;
+  --platform-youtube: #ff003c;
+  --platform-linkedin: #00ffff;
 
   /* Shadows & effects */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.6);
-  --shadow-glow-blue: 0 0 30px rgba(59, 130, 246, 0.06);
-  --shadow-glow-red: 0 0 30px rgba(239, 68, 68, 0.06);
-  --shadow-glow-green: 0 0 30px rgba(16, 185, 129, 0.06);
+  --shadow-sm: 0 0 5px rgba(0, 255, 65, 0.2);
+  --shadow-md: 0 0 10px rgba(0, 255, 65, 0.3);
+  --shadow-lg: 0 0 20px rgba(0, 255, 65, 0.4);
+  --shadow-glow-blue: 0 0 20px rgba(0, 255, 255, 0.3);
+  --shadow-glow-red: 0 0 20px rgba(255, 0, 60, 0.3);
+  --shadow-glow-green: 0 0 20px rgba(0, 255, 65, 0.3);
 
   /* Sizing */
   --sidebar-width: 260px;
   --topbar-height: 52px;
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 20px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
 
   /* Transitions */
-  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 100ms linear;
+  --transition-normal: 200ms linear;
+  --transition-slow: 300ms linear;
 }
 
 /* ============================================
@@ -98,12 +99,13 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'JetBrains Mono', monospace;
   background: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
   overflow: hidden;
   height: 100vh;
+  text-transform: uppercase;
 }
 
 .font-playfair { font-family: 'Playfair Display', serif; }
@@ -190,6 +192,7 @@ a:hover {
   z-index: 100;
   position: relative;
   overflow: hidden;
+  box-shadow: inset -10px 0 30px rgba(0,0,0,0.5);
 }
 
 .sidebar::after {
@@ -199,7 +202,7 @@ a:hover {
   right: 0;
   width: 1px;
   height: 100%;
-  background: linear-gradient(180deg, transparent 0%, rgba(59,130,246,0.2) 20%, rgba(59,130,246,0.2) 80%, transparent 100%);
+  background: linear-gradient(180deg, transparent 0%, rgba(213,0,249,0.3) 20%, rgba(0,229,255,0.3) 80%, transparent 100%);
   opacity: 1;
 }
 

@@ -64,7 +64,7 @@ def build_network_data(results: list[dict], center_label: str = "Narrative") -> 
         
         # Export interactive HTML using PyVis
         from pyvis.network import Network
-        net = Network(height='600px', width='100%', bgcolor='#0f172a', font_color='#ffffff', directed=True)
+        net = Network(height='600px', width='100%', bgcolor='#050211', font_color='#00e5ff', directed=True)
         
         # Transfer nodes with sizes and colors
         for node, attrs in G.nodes(data=True):
@@ -85,17 +85,21 @@ def build_network_data(results: list[dict], center_label: str = "Narrative") -> 
         var options = {
           "physics": {
             "forceAtlas2Based": {
-              "gravitationalConstant": -150,
-              "centralGravity": 0.015,
-              "springLength": 100,
-              "springConstant": 0.08
+              "gravitationalConstant": -120,
+              "centralGravity": 0.01,
+              "springLength": 220,
+              "springConstant": 0.04
             },
             "minVelocity": 0.75,
             "solver": "forceAtlas2Based",
             "stabilization": {
               "enabled": true,
-              "iterations": 1000
+              "iterations": 2000
             }
+          },
+          "edges": {
+            "color": { "color": "rgba(0, 229, 255, 0.3)", "highlight": "#ff0055" },
+            "smooth": { "type": "continuous" }
           }
         }
         """)

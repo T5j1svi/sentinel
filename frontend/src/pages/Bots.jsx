@@ -15,6 +15,22 @@ export default function Bots() {
     }
   }, [automatedData?.bots]);
 
+  const runMockAnalysis = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setData({
+        analyzed_accounts: 45,
+        suspected_bots: 12,
+        coordination_score: 8.4,
+        bot_clusters: [
+          { name: 'Cluster Alpha (Astroturf)', size: 8, confidence: 'High' },
+          { name: 'Cluster Beta (Retweet Ring)', size: 4, confidence: 'Medium' }
+        ]
+      });
+    }, 2000);
+  };
+
   // Fallback auto-run if no automated pipeline data (e.g. legacy state)
   useEffect(() => {
     if (huntResults?.results?.length > 0 && !data && !automatedData?.bots && !loading) {
@@ -64,18 +80,32 @@ export default function Bots() {
         </div>
       </div>
 
-      {!hasResults && !loading && (
+      {!hasResults && !loading && !data && (
         <div className="empty-state">
           <div className="empty-icon">🤖</div>
-          <div className="empty-title">No Data Available</div>
+          <div className="empty-title">No Live Data Available</div>
           <div className="empty-text">
-            Run a Narrative Hunt first. Bot analysis requires real search results to score accounts.
+            Run a Narrative Hunt first to analyze real accounts, or click below to run a simulation.
           </div>
+          <button className="btn btn-ghost mt-3" style={{ border: '1px solid var(--accent-purple)' }} onClick={runMockAnalysis}>
+            [ SIMULATE BOT DETECTION ]
+          </button>
         </div>
       )}
 
       {loading && (
-        <div className="loading-spinner"><div className="spinner"></div></div>
+        <div className="glass-card mb-5">
+          <div className="flex items-center gap-3">
+            <span className="spinner" style={{ borderColor: 'var(--accent-purple)', borderTopColor: 'transparent' }}></span>
+            <div>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-primary)' }}>[ SYSTEM ] Analyzing Account Behaviors...</div>
+              <div className="text-xs" style={{ color: 'var(--accent-blue)' }}>Running temporal correlation and text-similarity checks...</div>
+            </div>
+          </div>
+          <div className="progress-bar mt-3" style={{ background: 'rgba(0,0,0,0.5)' }}>
+            <div className="progress-fill" style={{ width: '72%', background: 'var(--accent-purple)', boxShadow: 'var(--shadow-glow-purple)' }}></div>
+          </div>
+        </div>
       )}
 
       {data && (

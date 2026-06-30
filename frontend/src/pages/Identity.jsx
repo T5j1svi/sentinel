@@ -1,19 +1,27 @@
 import { useState } from 'react';
 import MetricCard from '../components/MetricCard';
 import api from '../api/sentinel';
+import { useApp } from '../AppContext';
 
 export default function Identity() {
-  const [username, setUsername] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [profileData, setProfileData] = useState(null);
+  const { 
+    identityData: profileData, 
+    setIdentityData: setProfileData,
+    identityLoading: loading, 
+    setIdentityLoading: setLoading,
+    identityUsername: username,
+    setIdentityUsername: setUsername
+  } = useApp();
 
   const runProfile = async () => {
     if (!username.trim()) return;
     setLoading(true);
     try {
-      // Use hunt API with username as narrative for cross-platform search
+      const formattedNarrative = `"${username.trim()}" (site:twitter.com OR site:x.com OR site:t.me OR site:youtube.com OR site:instagram.com OR site:tiktok.com OR site:linkedin.com OR site:facebook.com)`;
+      
+      // Use hunt API with omni-platform dork search
       const data = await api.runHunt({
-        narrative: username.trim(),
+        narrative: formattedNarrative,
         platforms: ['X', 'Telegram', 'YouTube', 'Instagram', 'TikTok', 'LinkedIn', 'Facebook'],
         depth: 6,
         fetch_metadata: true,

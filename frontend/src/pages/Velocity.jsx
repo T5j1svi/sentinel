@@ -23,6 +23,24 @@ export default function Velocity() {
 
   useEffect(() => { loadVelocity(narrative); }, [timeRange]);
 
+  const runMockAnalysis = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setData({
+        peak_velocity: 340,
+        anomalies: [{ timestamp: new Date().toISOString(), platform: 'Twitter', count: 340 }],
+        data_points: [
+          { count: 2, is_anomaly: false },
+          { count: 45, is_anomaly: false },
+          { count: 120, is_anomaly: false },
+          { count: 340, is_anomaly: true }
+        ],
+        current_trend: 'spike_detected'
+      });
+    }, 2000);
+  };
+
   const renderChart = () => {
     if (!data || !data.data_points || data.data_points.length === 0) return null;
 
@@ -197,9 +215,29 @@ export default function Velocity() {
 
       {!data && !loading && (
         <div className="empty-state">
-          <div className="empty-icon">📈</div>
-          <div className="empty-title">Velocity Monitor</div>
-          <div className="empty-text">Loading real-time velocity data from the backend...</div>
+          <div className="empty-icon">⏱️</div>
+          <div className="empty-title">No Live Data Available</div>
+          <div className="empty-text">
+            Run a Narrative Hunt first to analyze real timestamps, or click below to run a simulation.
+          </div>
+          <button className="btn btn-ghost mt-3" style={{ border: '1px solid var(--accent-blue)' }} onClick={runMockAnalysis}>
+            [ SIMULATE SPREAD VELOCITY ]
+          </button>
+        </div>
+      )}
+
+      {loading && (
+        <div className="glass-card mb-5">
+          <div className="flex items-center gap-3">
+            <span className="spinner" style={{ borderColor: 'var(--accent-blue)', borderTopColor: 'transparent' }}></span>
+            <div>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-primary)' }}>[ SYSTEM ] Calculating Temporal Spread...</div>
+              <div className="text-xs" style={{ color: 'var(--accent-cyan)' }}>Aggregating timestamp metadata and calculating delta-T vectors...</div>
+            </div>
+          </div>
+          <div className="progress-bar mt-3" style={{ background: 'rgba(0,0,0,0.5)' }}>
+            <div className="progress-fill" style={{ width: '90%', background: 'var(--accent-blue)', boxShadow: 'var(--shadow-glow-blue)' }}></div>
+          </div>
         </div>
       )}
     </div>

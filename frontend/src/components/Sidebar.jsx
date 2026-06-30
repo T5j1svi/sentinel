@@ -4,26 +4,26 @@ import { motion } from 'framer-motion';
 
 const navItems = [
   { label: 'COMMAND', items: [
-    { path: '/', icon: '⚡', label: 'Dashboard' },
+    { path: '/', icon: '>', label: 'Dashboard' },
   ]},
   { label: 'COLLECTION', items: [
-    { path: '/hunt', icon: '🎯', label: 'Narrative Hunt' },
-    { path: '/identity', icon: '👤', label: 'Identity Profiler' },
-    { path: '/media', icon: '🖼️', label: 'Media Forensics' },
+    { path: '/hunt', icon: '>', label: 'Narrative Hunt' },
+    { path: '/identity', icon: '>', label: 'Identity Profiler' },
+    { path: '/media', icon: '>', label: 'Media Forensics' },
   ]},
   { label: 'INTELLIGENCE', items: [
-    { path: '/velocity', icon: '📈', label: 'Velocity Monitor' },
-    { path: '/network', icon: '🕸️', label: 'Network Mapper' },
-    { path: '/bots', icon: '🤖', label: 'Behaviour Profiler' },
-    { path: '/tactics', icon: '🛡️', label: 'DISARM Tactics' },
+    { path: '/velocity', icon: '>', label: 'Velocity Monitor' },
+    { path: '/network', icon: '>', label: 'Network Mapper' },
+    { path: '/bots', icon: '>', label: 'Behaviour Profiler' },
+    { path: '/tactics', icon: '>', label: 'DISARM Tactics' },
   ]},
   { label: 'ATTRIBUTION', items: [
-    { path: '/infrastructure', icon: '🏗️', label: 'Infrastructure' },
-    { path: '/geo', icon: '🌍', label: 'Geo Intelligence' },
+    { path: '/infrastructure', icon: '>', label: 'Infrastructure' },
+    { path: '/geo', icon: '>', label: 'Geo Intelligence' },
   ]},
   { label: 'OUTPUT', items: [
-    { path: '/evidence', icon: '🔒', label: 'Evidence Locker', showBadge: true },
-    { path: '/reports', icon: '📋', label: 'Report Generator' },
+    { path: '/evidence', icon: '>', label: 'Evidence Locker', showBadge: true },
+    { path: '/reports', icon: '>', label: 'Report Generator' },
   ]},
 ];
 
@@ -46,11 +46,10 @@ export default function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="sidebar-brand">
-        <h1>
-          <span className="brand-icon">🛡️</span>
-          SENTINEL
+        <h1 style={{ textShadow: '0 0 8px var(--accent-green)' }}>
+          <span className="brand-icon">#</span> SENTINEL
         </h1>
-        <div className="brand-sub">Intel Platform v3.0</div>
+        <div className="brand-sub">OSINT SECURE TERMINAL</div>
       </div>
 
       <motion.nav 

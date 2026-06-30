@@ -11,7 +11,16 @@ export function AppProvider({ children }) {
   const [huntNarrative, setHuntNarrative] = useState(() => {
     return localStorage.getItem('sentinel_huntNarrative') || '';
   });
-  
+
+  // Identity Profiler state
+  const [identityData, setIdentityData] = useState(() => {
+    const saved = localStorage.getItem('sentinel_identityData');
+    return saved ? JSON.parse(saved) : null;
+  });
+  const [identityLoading, setIdentityLoading] = useState(false);
+  const [identityUsername, setIdentityUsername] = useState(() => {
+    return localStorage.getItem('sentinel_identityUsername') || '';
+  });
   // Case management
   const [caseId, setCaseId] = useState('default');
   const [caseName, setCaseName] = useState('New Investigation');
@@ -72,6 +81,20 @@ export function AppProvider({ children }) {
     huntResults,
     huntNarrative,
     storeHuntResults,
+    
+    // Identity data
+    identityData,
+    setIdentityData: (data) => {
+      setIdentityData(data);
+      localStorage.setItem('sentinel_identityData', JSON.stringify(data));
+    },
+    identityLoading,
+    setIdentityLoading,
+    identityUsername,
+    setIdentityUsername: (name) => {
+      setIdentityUsername(name);
+      localStorage.setItem('sentinel_identityUsername', name);
+    },
     
     // Case
     caseId,

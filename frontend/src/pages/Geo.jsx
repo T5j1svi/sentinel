@@ -15,6 +15,27 @@ export default function Geo() {
     }
   }, [automatedData?.geo]);
 
+  const runMockAnalysis = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setData({
+        points: [],
+        total_points: 124,
+        countries: {
+          'Russia': 45,
+          'China': 32,
+          'Iran': 15,
+          'United States': 32
+        },
+        anomalies: [
+          { anomaly_reason: 'IP Geolocation mismatch with declared Profile Region', country: 'Russia', source_type: 'X (Twitter)' },
+          { anomaly_reason: 'Timezone / Posting hour anomaly (UTC+3 offset)', country: 'China', source_type: 'Telegram' }
+        ]
+      });
+    }, 2000);
+  };
+
   // Fallback auto-run
   useEffect(() => {
     if (huntResults?.results?.length > 0 && !data && !automatedData?.geo && !loading) {
@@ -78,18 +99,32 @@ export default function Geo() {
         </div>
       </div>
 
-      {!hasResults && !loading && (
+      {!hasResults && !loading && !data && (
         <div className="empty-state">
           <div className="empty-icon">🌍</div>
-          <div className="empty-title">No Data Available</div>
+          <div className="empty-title">No Live Data Available</div>
           <div className="empty-text">
-            Run a Narrative Hunt first. Geo Intelligence maps real results to their geographic origins and hosting countries.
+            Run a Narrative Hunt first to map real results, or click below to run a simulation.
           </div>
+          <button className="btn btn-ghost mt-3" style={{ border: '1px solid var(--accent-cyan)' }} onClick={runMockAnalysis}>
+            [ SIMULATE GEO-TRACE ]
+          </button>
         </div>
       )}
 
       {loading && (
-        <div className="loading-spinner"><div className="spinner"></div></div>
+        <div className="glass-card mb-5">
+          <div className="flex items-center gap-3">
+            <span className="spinner" style={{ borderColor: 'var(--accent-cyan)', borderTopColor: 'transparent' }}></span>
+            <div>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-primary)' }}>[ SYSTEM ] Triangulating Nodes...</div>
+              <div className="text-xs" style={{ color: 'var(--accent-blue)' }}>Running IP extraction and satellite overlay...</div>
+            </div>
+          </div>
+          <div className="progress-bar mt-3" style={{ background: 'rgba(0,0,0,0.5)' }}>
+            <div className="progress-fill" style={{ width: '85%', background: 'var(--accent-cyan)', boxShadow: 'var(--shadow-glow-blue)' }}></div>
+          </div>
+        </div>
       )}
 
       {data && (

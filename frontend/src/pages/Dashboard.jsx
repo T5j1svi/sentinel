@@ -47,17 +47,17 @@ export default function Dashboard() {
   }, []);
 
   const modules = [
-    { name: 'Narrative Hunt', icon: '🎯', path: '/hunt', desc: 'Cross-platform multilingual OSINT search', status: 'real' },
-    { name: 'Identity Profiler', icon: '👤', path: '/identity', desc: 'Account behavior analysis & cross-platform linking', status: 'new' },
-    { name: 'Media Forensics', icon: '🖼️', path: '/media', desc: 'Image/video EXIF, reverse search, deepfake detection', status: 'new' },
-    { name: 'Velocity Monitor', icon: '📈', path: '/velocity', desc: 'Real-time narrative spread & anomaly detection', status: 'real' },
-    { name: 'Network Mapper', icon: '🕸️', path: '/network', desc: 'Influence network with community detection', status: 'real' },
-    { name: 'Behaviour Profiler', icon: '🤖', path: '/bots', desc: 'Coordination scoring & bot detection', status: 'real' },
-    { name: 'DISARM Tactics', icon: '🛡️', path: '/tactics', desc: 'Disinformation tactic classification', status: 'real' },
-    { name: 'Infrastructure', icon: '🏗️', path: '/infrastructure', desc: 'WHOIS, DNS, cert transparency, hosting', status: 'real' },
-    { name: 'Geo Intelligence', icon: '🌍', path: '/geo', desc: 'Geographic origin mapping & anomalies', status: 'real' },
-    { name: 'Evidence Locker', icon: '🔒', path: '/evidence', desc: 'SHA-256 hashing, archiving, chain of custody', status: 'real' },
-    { name: 'Report Generator', icon: '📋', path: '/reports', desc: 'PDF/DOCX/STIX intelligence reports', status: 'real' },
+    { name: 'Narrative Hunt', icon: '>', path: '/hunt', desc: 'Cross-platform multilingual OSINT search', status: 'real' },
+    { name: 'Identity Profiler', icon: '>', path: '/identity', desc: 'Account behavior analysis & cross-platform linking', status: 'new' },
+    { name: 'Media Forensics', icon: '>', path: '/media', desc: 'Image/video EXIF, reverse search, deepfake detection', status: 'new' },
+    { name: 'Velocity Monitor', icon: '>', path: '/velocity', desc: 'Real-time narrative spread & anomaly detection', status: 'real' },
+    { name: 'Network Mapper', icon: '>', path: '/network', desc: 'Influence network with community detection', status: 'real' },
+    { name: 'Behaviour Profiler', icon: '>', path: '/bots', desc: 'Coordination scoring & bot detection', status: 'real' },
+    { name: 'DISARM Tactics', icon: '>', path: '/tactics', desc: 'Disinformation tactic classification', status: 'real' },
+    { name: 'Infrastructure', icon: '>', path: '/infrastructure', desc: 'WHOIS, DNS, cert transparency, hosting', status: 'real' },
+    { name: 'Geo Intelligence', icon: '>', path: '/geo', desc: 'Geographic origin mapping & anomalies', status: 'real' },
+    { name: 'Evidence Locker', icon: '>', path: '/evidence', desc: 'SHA-256 hashing, archiving, chain of custody', status: 'real' },
+    { name: 'Report Generator', icon: '>', path: '/reports', desc: 'PDF/DOCX/STIX intelligence reports', status: 'real' },
   ];
 
   const resultCount = huntResults?.total_results || stats?.total_results || 0;
@@ -67,27 +67,32 @@ export default function Dashboard() {
     <div>
       {/* Hero */}
       <motion.div 
-        initial={{ opacity: 0, y: -10 }} 
-        animate={{ opacity: 1, y: 0 }} 
+        initial={{ opacity: 0, x: -50 }} 
+        animate={{ opacity: 1, x: 0 }} 
         transition={{ duration: 0.4 }}
         className="hero-card mb-5"
+        style={{ borderLeft: '4px solid var(--accent-green)', paddingLeft: '16px' }}
       >
         <div className="flex items-center justify-between" style={{ position: 'relative', zIndex: 1 }}>
           <div>
-            <h1 style={{ fontSize: '24px', fontWeight: 800, letterSpacing: '-0.03em', marginBottom: '4px' }}>
-              🛡️ SENTINEL Intel
-            </h1>
+            <motion.h1 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              style={{ fontSize: '24px', fontWeight: 800, letterSpacing: '-0.03em', marginBottom: '4px', textShadow: '0 0 10px var(--accent-green)' }}
+            >
+              [ROOT@SENTINEL-INTEL]~$ ./start_lab.sh
+            </motion.h1>
             <p className="text-muted" style={{ fontSize: '13px', maxWidth: '550px' }}>
-              Cyber Intelligence Investigation Lab — Find the source. Map the network. Prove the narrative.
+              {'>> Cyber Intelligence Investigation Lab initialized. Tracking systems online.'}
             </p>
           </div>
           <div style={{ textAlign: 'right' }}>
-            <div className="badge badge-success" style={{ fontSize: '11px', padding: '4px 12px' }}>
-              {health ? '● ALL SYSTEMS OPERATIONAL' : loading ? '● CONNECTING...' : '● CHECKING STATUS'}
+            <div className="badge badge-success" style={{ fontSize: '11px', padding: '4px 12px', border: '1px solid var(--accent-green)', background: 'var(--bg-card)' }}>
+              {health ? '[ ALL SYSTEMS ONLINE ]' : loading ? '[ CONNECTING... ]' : '[ CHECKING STATUS ]'}
             </div>
             {health && (
               <div className="text-xs text-muted" style={{ marginTop: '4px' }}>
-                Backend: {health.version || 'v3.0'}
+                KERNEL: {health.version || 'v3.0'}
               </div>
             )}
           </div>
@@ -101,11 +106,11 @@ export default function Dashboard() {
         animate="show"
         className="metrics-grid"
       >
-        <motion.div variants={cardVariants}><MetricCard icon="📊" value={casesCount} label="Active Cases" accentColor="var(--accent-blue)" /></motion.div>
-        <motion.div variants={cardVariants}><MetricCard icon="🔒" value={evidenceCount} label="Evidence Items" accentColor="var(--accent-green)" /></motion.div>
-        <motion.div variants={cardVariants}><MetricCard icon="🎯" value={resultCount} label="Total Results" accentColor="var(--accent-amber)" /></motion.div>
-        <motion.div variants={cardVariants}><MetricCard icon="📡" value={stats?.platforms_monitored || 14} label="Platform Connectors" accentColor="var(--accent-purple)" /></motion.div>
-        <motion.div variants={cardVariants}><MetricCard icon="🌐" value="12" label="Languages Active" accentColor="var(--accent-cyan)" /></motion.div>
+        <motion.div variants={cardVariants}><MetricCard icon="[A]" value={casesCount} label="Active Cases" accentColor="var(--accent-green)" /></motion.div>
+        <motion.div variants={cardVariants}><MetricCard icon="[E]" value={evidenceCount} label="Evidence Items" accentColor="var(--accent-green)" /></motion.div>
+        <motion.div variants={cardVariants}><MetricCard icon="[R]" value={resultCount} label="Total Results" accentColor="var(--accent-green)" /></motion.div>
+        <motion.div variants={cardVariants}><MetricCard icon="[P]" value={stats?.platforms_monitored || 14} label="Platform Connectors" accentColor="var(--accent-green)" /></motion.div>
+        <motion.div variants={cardVariants}><MetricCard icon="[L]" value="12" label="Languages Active" accentColor="var(--accent-green)" /></motion.div>
       </motion.div>
 
       {/* Modules Grid */}
